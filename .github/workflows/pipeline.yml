@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-build:
-  deploy:
+jobs:
+  build:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
