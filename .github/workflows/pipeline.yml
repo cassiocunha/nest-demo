@@ -7,8 +7,7 @@ on:
     branches: [main]
     types: [opened, synchronize]
 jobs:
-
-  lint:
+  build:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -16,38 +15,12 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: "16"
       - name: Install
         run: npm install
       - name: Lint
         run: npm run lint
-
-  test:
-    needs: [lint]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - name: Install
-        run: npm install
       - name: Test
         run: npm run test
-
-  build:
-    needs: [test]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - name: Install
-        run: npm install
       - name: Build
         run: npm run build
